@@ -1,43 +1,35 @@
+//! Immutable Refrences
 // fn main() {
-//     let mut  my_string = String::from("Hello, Rust!");
-//      my_string=  takes_ownership(my_string);  // Pass a reference to my_string
+//     let my_string = String::from("Hello, Rust!");
+//     takes_ownership(&my_string);  // Pass a reference to my_string
 //     println!("{}", my_string);    // This is valid because ownership was not transferred
 // }
 
-// fn takes_ownership(some_string: String ) -> String{
+// fn takes_ownership(some_string: &String) {
 //     println!("{}", some_string);  // some_string is borrowed and not moved
-
-//     return some_string;
 // }
 
 
-fn main() {
-    let s1 = gives_ownership();         // gives_ownership moves its return
-                                        // value into s1
+// ! Mutable Refrences
 
-    let s2 = String::from("hello");     // s2 comes into scope
+// fn main() {
+//     let mut s1 = String::from("Vedik");
+//     update_word(&mut s1);
+//     println!("{}", s1);
+// }
 
-    let s3 = takes_and_gives_back(s2);  // s2 is moved into
-                                        // takes_and_gives_back, which also
-                                        // moves its return value into s3
-                                        println!("{},{}", s1,  s3);
-} // Here, s3 goes out of scope and is dropped. s2 was moved, so nothing
-  // happens. s1 goes out of scope and is dropped.
+// fn update_word(word: &mut String) {
+//     word.push_str(" RustPaglu");
+// }
 
-fn gives_ownership() -> String {             // gives_ownership will move its
-                                             // return value into the function
-                                             // that calls it
+//! Mutable Refrences with immutable
+fn main(){
+    let mut s1 = String::from("Hello");
+    let s2 = &mut s1;
 
-    let some_string = String::from("yours"); // some_string comes into scope
+    s2.push_str(" World"); //if you use s2 just after borrowing and before declaring s3 (with mutable or immutable reference), the code will compile and run 
 
-    some_string                              // some_string is returned and
-                                             // moves out to the calling
-                                             // function
-}
+    let s3 = &s1;
 
-// This function takes a String and returns one
-fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
-                                                      // scope
-
-    a_string  // a_string is returned and moves out to the calling function
+    println!("{}",s3); 
 }
