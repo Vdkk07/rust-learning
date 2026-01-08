@@ -35,4 +35,15 @@ fn main(){
         }
         Err(_) => println!("Error while serializing")
     }
+
+    // serialize
+    let encode = borsh::to_vec(&u).unwrap();
+    println!("{:?}", encode);
+    // deserialize m-1
+    let decode:Result<User, std::io::Error> = borsh::from_slice(&encode);
+    println!("{:?}", decode);
+    // deserialize m-2
+    let decode_2 = User::try_from_slice(&encode).unwrap();
+    println!("{:?}", decode_2);
+    
 }

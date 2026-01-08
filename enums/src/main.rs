@@ -30,6 +30,20 @@ impl Shape {
         }
     }
     }
+
+    fn perimeter(&self) -> f32{
+        match self {
+            Shape::Circle(radius) => {
+               2.0 * PI * radius
+            },
+            Shape::Square(side) =>{
+                4.0 * side
+            },
+            Shape::Rectangle(len,wid ) => {
+                2.0 * (len + wid)
+            }
+        }
+    }
 }
 fn main(){
     //! Direction enum
@@ -51,6 +65,7 @@ fn main(){
 
     // # Approach 2 
     println!("{}", _shape_circle.area());
+    println!("Perimeter: {}", _shape_circle.perimeter());
 }
 
 
