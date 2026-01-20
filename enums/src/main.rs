@@ -1,10 +1,55 @@
+#![allow(dead_code)]
 use std::f32::consts::PI;
 
 enum Direction {
-    North,
-    South,
-    East,
-    West
+    North, //? Unit type
+    South, //? Unit type
+    East, //? Unit type
+    West //? Unit type
+}
+
+#[derive(Debug)]
+enum Directions {
+    Up(Point),
+    Down(Point),
+    Left(Point),
+    Right(Point)
+}
+
+#[derive(Debug)]
+enum Keys {
+    UpKey(String),
+    DownKey(String),
+    LeftKey(String),
+    RightKey(String)
+}
+
+#[derive(Debug)]
+struct Point{
+    x: i32,
+    y: i32
+}
+
+impl Directions {
+    fn match_direction(&self ) -> Keys{
+        match *self {
+            Directions::Up(_)=> Keys::UpKey(String::from("pressed W")),
+            Directions::Down(_)=> Keys::DownKey(String::from("pressed S")),
+            Directions::Left(_)=> Keys::LeftKey(String::from("pressed A")),
+            Directions::Right(_)=> Keys::RightKey(String::from("pressed D")),
+        }
+    }
+}
+
+impl Keys {
+    fn destruct(&self) -> &String{
+        match *self { 
+            Keys::UpKey(ref s) => s,
+            Keys::DownKey(ref s) => s,
+            Keys::LeftKey(ref s) => s,
+            Keys::RightKey(ref s) => s,
+        }
+    }
 }
 
 // ! Enums can also store values
@@ -66,6 +111,14 @@ fn main(){
     // # Approach 2 
     println!("{}", _shape_circle.area());
     println!("Perimeter: {}", _shape_circle.perimeter());
+
+    // ! New Learning
+    let u = Directions::Up(Point { x: 10, y: 4 });
+    let k = u.match_direction();
+    let x = k.destruct();
+
+    println!("{:?}", k);
+    println!("{:?}", x)
 }
 
 
