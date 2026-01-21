@@ -1,3 +1,11 @@
+#![allow(dead_code)]
+// ? A vector is represented by three different pieces of data a pointer to a data, its length and its capacity. The capacity itself indicates how much memory is reserved for the vector and the vector can grow as long as the length is smaller than the capacity. When this threshold needs to be surpassed the vector is then reallocated with larger capacity
+#[derive(Debug)]
+enum Examples{
+    Int(i32),
+    Float(f32),
+    Text(String)
+}
 fn main (){
     let mut vec = vec![1,2,3,4,5,6,7];
     println!("Orginal vector: {:?}", vec);
@@ -12,6 +20,31 @@ fn main (){
     even_integer2(&mut vec);
     println!("mutate the original vector for even integers: {:?} ",vec);
 
+    // ! New Learning
+    let mut v = Vec::new();
+
+    v.push(5);
+    v.push(6);
+    v.push(7);
+    v.push(8);
+
+    for i in &v{
+        println!("{}", i);
+    }
+
+    v.push(9);
+    
+    println!("{:?} {} {}", &v, v.len(), v.capacity());
+
+    println!("{:?}", v.pop());
+
+    let r = vec![
+        Examples::Int(123),
+        Examples::Float(79.84),
+        Examples::Text(String::from("Enums in Vector"))
+    ];
+
+    println!("{:?}", r);
 
 }
 
