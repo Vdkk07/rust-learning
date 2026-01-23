@@ -25,6 +25,28 @@ fn main(){
    let hm = group_value_by_key(input_vec);
    println!("{:?}", hm);
 
+   // ! New Learning
+
+   let mut hm: HashMap<String, i32> = HashMap::new();
+
+   hm.insert(String::from("random"), 19);
+   hm.insert(String::from("string"), 14);
+
+   for i in &hm{
+    println!("{:?}", i);
+   }
+
+   match hm.get(&String::from("random")) {
+        Some(&v) => println!("{}", &v),
+        _ => println!("no match")
+   }
+
+   hm.remove(&String::from("string"));
+
+   for i in &hm{
+    println!("{:?}", i);
+   }
+   
 }
 
 fn group_value_by_key(vec:Vec<(String,i32)>) -> HashMap<String,i32> {
